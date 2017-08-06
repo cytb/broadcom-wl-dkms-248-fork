@@ -3,7 +3,7 @@
 # Contributor: yafengabc <yafengabc (at) gmail.>
 
 pkgname=broadcom-wl-dkms-248
-pkgver=6.30.223.248-1
+pkgver=6.30.223.248.r1
 pkgrel=1
 pkgdesc="Broadcom 802.11 Linux STA wireless driver Old version for some bcm card kernel crash"
 arch=('i686' 'x86_64')
