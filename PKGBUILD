@@ -3,7 +3,7 @@
 # Contributor: yafengabc <yafengabc (at) gmail.>
 
 pkgname=broadcom-wl-dkms-248
-pkgver=6.30.223.248
+pkgver=6.30.223.248-1
 pkgrel=1
 pkgdesc="Broadcom 802.11 Linux STA wireless driver Old version for some bcm card kernel crash"
 arch=('i686' 'x86_64')
@@ -16,7 +16,7 @@ conflicts=('broadcom-wl' 'broadcom-wl-dkms')
 backup=('etc/modprobe.d/broadcom-wl-dkms.conf')
 install=broadcom-wl-dkms.install
 source=('broadcom-wl-dkms.conf'
-        'dkms.conf'
+        'dkms.conf.in'
         'linux-4.7.patch'
         )
 
@@ -25,13 +25,14 @@ source=('broadcom-wl-dkms.conf'
 source_i686=("https://pkgs.rpmfusion.org/repo/pkgs/nonfree/broadcom-wl/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz/e048154b3f4c7ad6bee36cab5b37486d/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz")
 source_x86_64=("https://pkgs.rpmfusion.org/repo/pkgs/nonfree/broadcom-wl/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz/0237917f75d121589ec16a44eac5f5b0/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz")
 sha256sums=('b97bc588420d1542f73279e71975ccb5d81d75e534e7b5717e01d6e6adf6a283'
-            '2ff32beee3478da027f7bd6ef8333f441c42a0f89ae175105f11e12ba2b1e018'
+            'c59c3ccf5238fe93cc671e6fa2f6614c0bfec073dc79bfda4d14e3a5be96eac8'
             '220fea898bd9c96560c7b89881ba1f8faa9f23afd109d2a57bf8e7ddc9ecda34')
 sha256sums_i686=('b196543a429c22b2b8d75d0c1d9e6e7ff212c3d3e1f42cc6fd9e4858f01da1ad')
 sha256sums_x86_64=('3d994cc6c05198f4b6f07a213ac1e9e45a45159899e6c4a7feca5e6c395c3022')
 
 prepare() {
   cd "${srcdir}"
+  sed -e "s/@PACKAGE_VERSION@/${pkgver}/" dkms.conf.in > dkms.conf
   patch -p1 -i linux-4.7.patch
 }
 
@@ -50,5 +51,4 @@ package() {
   install -D -m 644 broadcom-wl-dkms.conf "${pkgdir}/etc/modprobe.d/broadcom-wl-dkms.conf"
 }
 
-# vim:set ts=2 sw=2 et:
 
